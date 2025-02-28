@@ -214,13 +214,17 @@
             #bg-video {
                 display: block;
             }
-            
+
+            .card {
+                width:250px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Video Background -->
-    <video autoplay loop muted id="bg-video">
+      <!-- Video Background -->
+      <video autoplay loop muted id="bg-video">
         <source src="mobile.mp4" type="video/mp4">
         Browser Anda tidak mendukung video.
     </video>
@@ -230,7 +234,7 @@
     
     <!-- Audio -->
     <audio id="background-audio">
-        <source src="Feast.mp3" type="audio">
+        <source src="Feast.mp3" type="audio/mpeg">
         Browser Anda tidak mendukung audio.
     </audio>
     
@@ -262,17 +266,41 @@
         const audioControl = document.getElementById("audio-control");
         const backgroundAudio = document.getElementById("background-audio");
         let index = 0;
-        
+
+
         // Fungsi untuk memutar/menghentikan audio
         audioControl.addEventListener("click", () => {
             if (backgroundAudio.paused) {
-                backgroundAudio.play();
-                audioControl.textContent = "⏸️"; // Ganti ikon ke pause
+                // Coba memutar audio
+                backgroundAudio.play()
+                    .then(() => {
+                        audioControl.textContent = "⏸️"; // Ganti ikon ke pause
+                        console.log("Audio berhasil diputar.");
+                    })
+                    .catch((error) => {
+                        console.error("Gagal memutar audio:", error);
+                        alert("Gagal memutar audio. Pastikan browser mendukung autoplay.");
+                    });
             } else {
                 backgroundAudio.pause();
                 audioControl.textContent = "🎵"; // Ganti ikon ke play
             }
         });
+
+        // Pastikan audio dimuat sebelum diputar
+        backgroundAudio.addEventListener("canplaythrough", () => {
+            console.log("Audio siap diputar.");
+        });
+
+        // Atur volume audio (opsional)
+        backgroundAudio.volume = 0.5; // Volume 50%
+
+        // Script lainnya tetap sama
+
+        // Atur volume audio (opsional)
+        backgroundAudio.volume = 0.5; // Volume 50%
+
+        // Script lainnya tetap sama
         
         function typeText(text, callback) {
             let i = 0;
