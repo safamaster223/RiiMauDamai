@@ -171,13 +171,23 @@
 
     
         }
-        
+            @media (max-width: 768px) { /* Biarkan video tetap muncul di mobile */
+        body {
+            background-image: none;
+        }
+        #bg-video {
+            display: block;
+        }
+            }
     </style>
 </head>
 <body>
-    <video autoplay loop id="bg-video">
-        <source src="mobile.mp4" type="video/mp4">
-    </video>
+    <video autoplay loop muted playsinline id="bg-video">
+    <source src="mobile.mp4" type="video/mp4">
+</video>
+
+
+
     
     <div class="card" id="card">
         <h2 id="question" class="blink-text">Maafin Aku Yaa👾</h2>
