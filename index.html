@@ -298,6 +298,14 @@
             let waLink = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
             window.location.href = waLink;
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+    let audio = document.getElementById("bg-music");
+    audio.play().catch(error => {
+        console.log("Autoplay gagal, butuh interaksi user!");
+    });
+});
+
     </script>
 
 </body>
