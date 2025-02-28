@@ -184,6 +184,9 @@
 <body>
     <video autoplay loop playsinline id="bg-video">
     <source src="mobile.mp4" type="video/mp4">
+    <audio id="bg-audio" loop>
+    <source src="Feast.mp3" type="audio/mp3">
+        </audio>
 </video>
 
 
@@ -244,6 +247,18 @@
             "klick sebelah nya"
         ];
 
+        window.onload = function() {
+        setTimeout(function() {
+            let userAction = confirm("Klik OK untuk mengaktifkan musik!");
+            if (userAction) {
+                let audio = document.getElementById("bg-audio");
+                audio.play().catch(error => {
+                    console.log("Autoplay masih diblokir, coba lagi.");
+                });
+            }
+        }, 500); // Delay biar halaman udah ke-load
+    };
+        
         function choose(value) {
             let question = document.getElementById("question");
             let buttons = document.getElementById("buttons");
